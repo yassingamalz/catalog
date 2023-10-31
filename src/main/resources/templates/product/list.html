@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Catalog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        /* Your CSS styles go here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50; /* Button color */
+            color: white; /* Text color */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Define a class for highlighting */
+        .highlight {
+            background-color: yellow;
+        }
+
+        /* Style the table rows with a class */
+        tr.special-row {
+            background-color: #ffcccb;
+        }
+
+        /* Add styles for buttons */
+        .filter-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        /* Add styles for filter inputs */
+        .filter-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .filter-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px; /* Add some spacing between input and button */
+        }
+    </style>
+</head>
+<body>
+<h1>Product Catalog</h1>
+
+<!-- Filter input text box and button in the same line -->
+<div class="filter-container">
+    <input type="text" id="filterCategory" class="filter-input" placeholder="Filter by Category">
+    <button class="filter-button">Filter</button>
+</div>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Price</th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.description}"></td>
+        <td th:text="${product.category.name}"></td>
+        <td th:text="${product.price}"></td>
+    </tr>
+</table>
+</body>
+</html>

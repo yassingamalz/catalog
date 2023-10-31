@@ -4,12 +4,14 @@ import com.baqalati.product.catalog.model.Product;
 import com.baqalati.product.catalog.repository.ProductRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/products")
 public class ProductController {
     private final ProductRepository productRepository;
@@ -21,6 +23,13 @@ public class ProductController {
     @GetMapping
     public List<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    @GetMapping("/list")
+    public String listProducts(Model model) {
+        List<Product> products = productRepository.findAll();
+        model.addAttribute("products", products);
+        return "product/list";
     }
 
     @GetMapping("/{id}")
